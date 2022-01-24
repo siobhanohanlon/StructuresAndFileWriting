@@ -47,6 +47,16 @@ void main()
 		averSales = sales / 12;
 
 		//Display
-		printf("\n\nCompanies Name: %s\nCompanies Reg: %d\nCompanies VAT Number: %d\nTotal Average Sales: %,.2f\n\n", company.name, company.companyReg, company.companyVAT, averSales);
+		printf("\n\nCompanies Name: %s\nCompanies Reg: %d\nCompanies VAT Number: %d\nTotal Average Sales: %,.2f\n\n", 
+			company.name, company.companyReg, company.companyVAT, averSales);
+	
+		//Print to file
+		FILE* companyDetails;
+		companyDetails = fopen("Companies.txt", "a");
+
+		fprintf(companyDetails, "\n\nCompanies Name: %s\nCompanies Reg: %d\nCompanies VAT Number: %d\nTotal Average Sales: %,.2f\n\n", 
+			company.name, company.companyReg, company.companyVAT, averSales);
+	
+		fclose(companyDetails);
 	}
 }
