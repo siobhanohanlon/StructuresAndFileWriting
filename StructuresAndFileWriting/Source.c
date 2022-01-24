@@ -21,6 +21,14 @@ void main()
 	//Only need to display info dont need to store
 	company company;
 
+	//File 
+	FILE* companyDetails;
+	FILE* companyData;
+	companyDetails = fopen("Companies.txt", "w");
+	companyData = fopen("CompanyData.txt", "w");
+	fclose(companyDetails);
+	fclose(companyData);
+
 	//Reading into group
 	for (int i = 1; i <= input; i++)
 	{
@@ -47,16 +55,20 @@ void main()
 		averSales = sales / 12;
 
 		//Display
-		printf("\n\nCompanies Name: %s\nCompanies Reg: %d\nCompanies VAT Number: %d\nTotal Average Sales: %,.2f\n\n", 
+		printf("\n\nCompanies Name: %s\nCompanies Reg: %d\nCompanies VAT Number: %d\nTotal Average Sales: %.2f\n\n", 
 			company.name, company.companyReg, company.companyVAT, averSales);
 	
-		//Print to file
-		FILE* companyDetails;
+		//Print to file for Human Reading
 		companyDetails = fopen("Companies.txt", "a");
 
-		fprintf(companyDetails, "\n\nCompanies Name: %s\nCompanies Reg: %d\nCompanies VAT Number: %d\nTotal Average Sales: %,.2f\n\n", 
-			company.name, company.companyReg, company.companyVAT, averSales);
+		fprintf(companyDetails, "Company %d\n  Name: %s\n  Reg Number: %d\n  VAT Number: %d\n  Total Average Sales: %.2f\n\n", 
+			i, company.name, company.companyReg, company.companyVAT, averSales);
 	
 		fclose(companyDetails);
+
+		//Print to File for Computer Reading
+		companyData = fopen("CompanyData.txt", "a");
+		fprintf(companyDetails, "%s\n%d\n%d\n%.2f\n",
+			company.name, company.companyReg, company.companyVAT, averSales);
 	}
 }
